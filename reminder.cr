@@ -7,7 +7,7 @@ message = ""
 db_path = "#{Path.home}/.reminder/db.sqlite3"
 
 OptionParser.parse do |parser|
-  parser.banner = "cli reminder - by arcc"
+  parser.banner = "cli reminder"
 
   parser.on "add", "Adds a new reminder" do
     parser.banner = "Example usage: reminder add -m \"tee time in 1h\""

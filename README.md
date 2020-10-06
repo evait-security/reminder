@@ -1,4 +1,4 @@
-# cli reminder - by arcc
+# cli reminder
 
 This small software uses the `notify-send` command in combination with a small sqlite database and systemd-timers in order to create text based reminders.
 
