@@ -1,4 +1,28 @@
 # cli reminder - by arcc
+This small software use the `notify-send` command in combination with a small sqlite database and systemd-timers in order to create text based reminders in future.
+
+## Example usage
+
+```bash
+reminder add -m "go to bed 1h" # reminds you in one hour with the message "go to bed"
+reminder add -m "10m re-calling bob" # reminds you in 10 minutes to re-call bob
+reminder show # show all upcomming reminders
+reminder run # execute all overdue reminders (should be used with systemd-timers or cron)
+```
+## bash / zsh alias
+You can create a small alias for your favorite shell. Edit your `.bashrc` or `.zshrc` and add the following function.
+
+```
+rme () {
+  reminder add -m "$*"
+}
+```
+
+Now reminders can be added with a minimum of parameter usage, e.g.: 
+
+```bash
+rme 10m make a break # reminds you in 10 minutes to take a break
+```
 
 ## creating a systemd timer (user)
 In order to recieve notifications you have to create a service / cronjob that executes reminders run method at least every minute.
