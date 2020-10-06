@@ -14,22 +14,22 @@ OptionParser.parse do |parser|
     action = "add"
     parser.on("-m", "--message=MESSAGE", "Set the message text for the reminder including the first time span matched followed by a whitespace or end of string (e.g. 1h or 2d)") { |m| message = m }
   end
-  parser.on("show", "Show all upcomming reminder") { action = "show" }
+  parser.on("show", "Show all upcoming reminders") { action = "show" }
   parser.on("run", "Checks reminder status and execute") { action = "run"}
-  parser.on "-h", "--help", "Show help - get more help with a specific action e.g. -a add" do
+  parser.on "-h", "--help", "Show help - get more help for a specific action e.g. -a add" do
     puts parser
     exit
   end
 end
 
 if action.empty?
-  puts "[-] no action defined, checkout -h, --help to get all options"
+  puts "[-] no action defined, check out -h, --help to get all options"
   exit
 end
 
 def check_db(db_path)
   unless File.exists?(db_path)
-    puts "[-] DB does not exists"
+    puts "[-] DB does not exist"
     init_db(db_path)
   end
 end
@@ -78,7 +78,7 @@ def add(db_path, message)
 
     # remove the regex match from the original message
     reminder_message = message.gsub(modifier_string, "").strip
-    
+
     case modifier_char
     when "s"
       reminder_time = reminder_time + modifier_number.seconds
@@ -114,7 +114,7 @@ def add(db_path, message)
 end
 
 def run(db_path)
-  reminter_to_delete = [] of Int64
+  reminder_to_delete = [] of Int64
 
   DB.open "sqlite3://#{db_path}" do |db|
     db.query "select rowid,message,time from reminders" do |rs|
@@ -125,11 +125,11 @@ def run(db_path)
         time_span = reminder_time - Time.local
         if time_span.to_i < 0
           Process.new("notify-send", ["-i", "alarm", reminder_message])
-          reminter_to_delete << reminder_id
-        end 
+          reminder_to_delete << reminder_id
+        end
       end
     end
-    reminter_to_delete.each do |reminder_id|
+    reminder_to_delete.each do |reminder_id|
       db.exec "delete from reminders where rowid = #{reminder_id}"
     end
   end

@@ -13,6 +13,10 @@ dependencies:
   sqlite3:
     github: crystal-lang/crystal-sqlite3
 
+targets:
+  reminder:
+    main: reminder.cr
+
 # development_dependencies:
 #   webmock:
 #     github: manastech/webmock.cr
