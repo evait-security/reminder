@@ -124,7 +124,7 @@ def run(db_path)
         reminder_time = Time.parse!(rs.read(String), "%Y-%m-%d %H:%M:%S %z")
         time_span = reminder_time - Time.local
         if time_span.to_i < 0
-          Process.new("notify-send", ["-i", "alarm", reminder_message])
+          Process.new("notify-send", ["-t", "0", "-i", "alarm", reminder_message])
           reminder_to_delete << reminder_id
         end
       end
