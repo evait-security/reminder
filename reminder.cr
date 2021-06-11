@@ -4,7 +4,7 @@ require "sqlite3"
 
 action = ""
 message = ""
-db_path = "#{Path.home}/.reminder/db.sqlite3"
+db_path = ENV["REMINDER_DB"]? || "#{Path.home}/.reminder/db.sqlite3"
 
 OptionParser.parse do |parser|
   parser.banner = "cli reminder"
