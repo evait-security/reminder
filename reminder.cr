@@ -93,11 +93,11 @@ def add(db_path, message)
     when "Y"
       reminder_time = reminder_time + modifier_number.years
     else
-      puts "[-] to timespan detected. Exiting ..."
+      puts "[-] no timespan detected. Exiting ..."
       exit
     end
   else
-    puts "[-] to timespan detected. Exiting ..."
+    puts "[-] no timespan detected. Exiting ..."
     exit
   end
   DB.open "sqlite3://#{db_path}" do |db|
