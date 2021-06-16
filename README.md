@@ -68,6 +68,12 @@ systemctl --user enable reminder.timer && systemctl --user start reminder.timer
 
 Coming soon, PR welcome.
 
+## running the developer tests
+
+```
+crystal spec
+```
+
 ## building from source
 
 Clone the repository and run:
